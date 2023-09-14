@@ -1,0 +1,28 @@
+﻿<Card CssClass="illustration flex-fill">
+    <CardBody CssClass="p-0 d-flex flex-fill">
+        <div class="row no-gutters w-100">
+            <div class="col-6">
+                <div class="illustration-text p-3 m-1">
+                    <h4 class="illustration-text">@Title</h4>
+                    <p class="mb-0">@Sumary</p>
+                </div>
+            </div>
+            <div class="col-6 align-self-end text-right">
+                <img src="@Image" alt="@Title"
+                     class="img-fluid illustration-img">
+            </div>
+        </div>
+    </CardBody>
+</Card>
+
+@code{
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Sumary { get; set; }
+
+    [Parameter]
+    public string Image { get; set; }
+}

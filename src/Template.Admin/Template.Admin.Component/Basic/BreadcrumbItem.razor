@@ -1,0 +1,21 @@
+﻿<li class="breadcrumb-item @(Active ? "active" : "")">
+    @if (string.IsNullOrEmpty(Path))
+    {
+        @Title
+    }
+    else
+    {
+        <a href="@Path">@Title</a>
+    }
+</li>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public bool Active { get; set; }
+
+    [Parameter]
+    public string Path { get; set; } = string.Empty;
+}

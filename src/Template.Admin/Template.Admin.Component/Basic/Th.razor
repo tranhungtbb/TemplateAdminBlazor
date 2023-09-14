@@ -1,0 +1,17 @@
+﻿<th class="@CssClass" rowspan="@RowSpan" colspan="@ColSpan">
+    @ChildContent
+</th>
+
+@code {
+    [Parameter]
+    public int RowSpan { get; set; } = 1;
+
+    [Parameter]
+    public int ColSpan { get; set; } = 1;
+
+    [Parameter]
+    public string CssClass { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

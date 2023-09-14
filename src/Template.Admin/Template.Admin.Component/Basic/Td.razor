@@ -1,0 +1,11 @@
+﻿<td class="@CssClass">
+    @ChildContent
+</td>
+
+@code {
+    [Parameter]
+    public string CssClass { get; set; } = string.Empty;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

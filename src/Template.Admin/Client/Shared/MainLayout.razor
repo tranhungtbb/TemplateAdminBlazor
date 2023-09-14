@@ -1,0 +1,20 @@
+﻿@inherits LayoutComponentBase
+
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar">
+        <Sidebar />
+    </nav>
+    <div class="main">
+        <Navbar/>
+        <main class="content">
+            <AppErrorBoundary>
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent Context="ex">
+                    @Body
+                </ErrorContent>
+            </AppErrorBoundary>
+        </main>
+    </div>
+</div>

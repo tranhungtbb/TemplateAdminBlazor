@@ -1,0 +1,6 @@
+﻿<button class="btn @(Type == ButtonType.Outline ? $"{Type}-{Appearance}" : $"{Type} {Appearance}") @($"btn-{Size}") @CssClass @(Shadown ? "shadow-sm" : "")"
+        disabled="@IsDisable"
+        @onclick:stopPropagation="true"
+        @onclick:preventDefault="true">
+    @ChildContent
+</button>

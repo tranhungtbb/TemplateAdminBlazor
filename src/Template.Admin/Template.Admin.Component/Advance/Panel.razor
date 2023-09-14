@@ -1,0 +1,21 @@
+﻿<div class="settings js-settings modal @(IsOpen ? "open" : "")">
+    <div class="settings-panel">
+        <div class="settings-content">
+            <div class="settings-title">
+                <button type="button" class="close float-right js-settings-toggle" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="mb-0 d-inline-block">@Title</h4>
+            </div>
+
+            <div class="settings-body">
+                @PanelBody
+            </div>
+
+            <div class="settings-footer">
+                @PanelFooter
+            </div>
+        </div>
+    </div>
+
+</div>

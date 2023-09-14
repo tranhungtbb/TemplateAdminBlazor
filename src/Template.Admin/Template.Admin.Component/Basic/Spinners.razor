@@ -1,0 +1,16 @@
+﻿<div class="spinner-border @Size text-@Appearance @CssClass" role="status">
+	<span class="sr-only">Loading...</span>
+</div>
+
+@code {
+
+	[Parameter]
+	public string Appearance { get; set; } = Constants.Appearance.Primary;
+
+	[Parameter]
+	public string Size { get; set; } = SpinnerSize.Default;
+
+	[Parameter]
+	public string CssClass { get; set; } = String.Empty;
+
+}

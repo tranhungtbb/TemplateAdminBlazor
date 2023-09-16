@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>Template.Admin.Server-078cbd20-bc7d-4f4e-b8d4-398edc3283d1</UserSecretsId>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.7" />
+		<PackageReference Include="NSwag.MSBuild" Version="13.20.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Client\Admin.Template.Client.csproj" />
+		<ProjectReference Include="..\Shared\Admin.Template.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+	</ItemGroup>
+	<!--<Target Name="GeneratNSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) aspnetcore2openapi /project:$(AssemblyName).csproj /nobuild:true /documentName:v1 /output:OAS_v1.json" />
+	</Target>-->
+	<Target Name="GeneratNSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
+		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) webapi2swagger /assembly:$(OutDir)/$(AssemblyName).dll /targetFramework:net7.0 /nobuild:true /documentName:v1 /output:swagger.json" />
+	</Target>
+
+</Project>

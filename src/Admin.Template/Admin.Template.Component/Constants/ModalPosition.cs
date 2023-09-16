@@ -1,4 +1,4 @@
-﻿namespace Template.Admin.Component.Constants;
+﻿namespace Admin.Template.Component.Constants;
 
 public class ModalPosition
 {

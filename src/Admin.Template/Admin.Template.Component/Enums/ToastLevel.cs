@@ -1,4 +1,4 @@
-﻿namespace Template.Admin.Component.Enums;
+﻿namespace Admin.Template.Component.Enums;
 
 public enum ToastLevel
 {

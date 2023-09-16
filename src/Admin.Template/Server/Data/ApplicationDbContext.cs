@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using Admin.Template.Server.Models;
 
-namespace Template.Admin.Server.Data;
+namespace Admin.Template.Server.Data;
 
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 {

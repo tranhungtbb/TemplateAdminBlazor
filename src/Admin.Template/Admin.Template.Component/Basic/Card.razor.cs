@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Template.Admin.Component.Basic;
+namespace Admin.Template.Component.Basic;
 
 public partial class Card : ComponentBase
 {

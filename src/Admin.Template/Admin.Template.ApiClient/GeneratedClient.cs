@@ -15,12 +15,12 @@
 #pragma warning disable 8603 // Disable "CS8603 Possible null reference return"
 #pragma warning disable 8604 // Disable "CS8604 Possible null reference argument for parameter"
 
-namespace Template.Admin.ApiClient
+namespace Admin.Template.ApiClient
 {
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class OidcConfigurationClient : Template.Admin.ApiClient.ClientBase
+    public partial class OidcConfigurationClient : Admin.Template.ApiClient.ClientBase
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
@@ -232,7 +232,7 @@ namespace Template.Admin.ApiClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class WeatherForecastClient : Template.Admin.ApiClient.ClientBase
+    public partial class WeatherForecastClient : Admin.Template.ApiClient.ClientBase
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;

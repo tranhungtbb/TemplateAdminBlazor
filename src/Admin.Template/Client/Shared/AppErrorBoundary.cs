@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace Template.Admin.Client.Shared;
+namespace Admin.Template.Client.Shared;
 public class AppErrorBoundary : ErrorBoundaryBase
 {
     [Inject]

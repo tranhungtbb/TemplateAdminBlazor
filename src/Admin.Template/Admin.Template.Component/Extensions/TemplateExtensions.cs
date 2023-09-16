@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Admin.Template.Component.Services;
 
-namespace Template.Admin.Component.Extensions;
+namespace Admin.Template.Component.Extensions;
 
 public static class TemplateExtensions
 {

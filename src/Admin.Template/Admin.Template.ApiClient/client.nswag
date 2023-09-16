@@ -10,7 +10,7 @@
   },
   "codeGenerators": {
     "openApiToCSharpClient": {
-      "clientBaseClass": "Template.Admin.ApiClient.ClientBase",
+      "clientBaseClass": "Admin.Template.ApiClient.ClientBase",
       "configurationClass": null,
       "generateClientClasses": true,
       "generateClientInterfaces": false,
@@ -54,7 +54,7 @@
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
-      "namespace": "Template.Admin.ApiClient",
+      "namespace": "Admin.Template.ApiClient",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTime",
       "jsonConverters": null,

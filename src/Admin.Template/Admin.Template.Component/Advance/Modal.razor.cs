@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Template.Admin.Component.Constants;
+using Admin.Template.Component.Constants;
 
-namespace Template.Admin.Component.Advance;
+namespace Admin.Template.Component.Advance;
 
 public partial class Modal : ComponentBase, IDisposable
 {

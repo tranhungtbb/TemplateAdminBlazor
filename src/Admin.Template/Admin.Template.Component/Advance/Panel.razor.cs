@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace Template.Admin.Component.Advance;
+namespace Admin.Template.Component.Advance;
 
 public partial class Panel
 {

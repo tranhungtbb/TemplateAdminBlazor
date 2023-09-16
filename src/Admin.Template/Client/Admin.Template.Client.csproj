@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admin.Template.Component\Admin.Template.Component.csproj" />
     <ProjectReference Include="..\Shared\Admin.Template.Shared.csproj" />
-    <ProjectReference Include="..\Template.Admin.Component\Admin.Template.Component.csproj" />
   </ItemGroup>
 
   <ItemGroup>

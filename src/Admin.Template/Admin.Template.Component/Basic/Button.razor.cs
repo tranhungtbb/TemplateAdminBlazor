@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Admin.Template.Component.Constants;
 
-namespace Template.Admin.Component.Basic;
+namespace Admin.Template.Component.Basic;
 
 public partial class Button : ComponentBase
 {

@@ -15,6 +15,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
 
 	<Target Name="GeneratNSwag" AfterTargets="PostBuildEvent">
 		<Exec Command="$(NSwagExe_Net70) run client.nswag /variables:Configuration=$(Configuration)" />

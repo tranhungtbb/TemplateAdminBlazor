@@ -1,4 +1,4 @@
-﻿namespace Template.Admin.Shared.Models;
+﻿namespace Admin.Template.Shared.Models;
 
 public class ModelBase
 {

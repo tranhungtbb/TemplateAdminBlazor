@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using Admin.Template.Component.Enums;
 
-namespace Template.Admin.Component.Services;
+namespace Admin.Template.Component.Services;
 
 public class ToastService
 {

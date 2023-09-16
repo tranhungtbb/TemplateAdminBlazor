@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using Admin.Template.Component.Constants;
 
-namespace Template.Admin.Component.Advance;
+namespace Admin.Template.Component.Advance;
 
 public partial class ModalConfirm : ComponentBase, IDisposable
 {

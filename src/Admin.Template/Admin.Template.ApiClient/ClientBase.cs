@@ -1,4 +1,4 @@
-﻿namespace Template.Admin.ApiClient;
+﻿namespace Admin.Template.ApiClient;
 
 public partial class ClientBase
 {

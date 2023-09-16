@@ -16,7 +16,7 @@ namespace Admin.Template.Server.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20417.2");
 
-            modelBuilder.Entity("Template.Admin.Server.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Admin.Template.Server.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -366,7 +366,7 @@ namespace Admin.Template.Server.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Template.Admin.Server.Models.ApplicationUser", null)
+                    b.HasOne("Admin.Template.Server.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -375,7 +375,7 @@ namespace Admin.Template.Server.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Template.Admin.Server.Models.ApplicationUser", null)
+                    b.HasOne("Admin.Template.Server.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -390,7 +390,7 @@ namespace Admin.Template.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Template.Admin.Server.Models.ApplicationUser", null)
+                    b.HasOne("Admin.Template.Server.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -399,7 +399,7 @@ namespace Admin.Template.Server.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Template.Admin.Server.Models.ApplicationUser", null)
+                    b.HasOne("Admin.Template.Server.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

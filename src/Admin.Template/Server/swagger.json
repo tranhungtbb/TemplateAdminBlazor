@@ -37,53 +37,6 @@
           }
         }
       }
-    },
-    "/WeatherForecast": {
-      "get": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "WeatherForecast_Get",
-        "responses": {
-          "200": {
-            "x-nullable": true,
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WeatherForecast"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "WeatherForecast": {
-      "type": "object",
-      "required": [
-        "Date",
-        "TemperatureC",
-        "TemperatureF"
-      ],
-      "properties": {
-        "Date": {
-          "type": "string",
-          "format": "date"
-        },
-        "TemperatureC": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Summary": {
-          "type": "string"
-        },
-        "TemperatureF": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
     }
   }
 }

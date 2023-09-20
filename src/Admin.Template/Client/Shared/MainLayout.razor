@@ -2,10 +2,17 @@
 
 <div class="wrapper">
     <nav id="sidebar" class="sidebar">
-        <Sidebar />
+        <div class="sidebar-content js-simplebar">
+            <Sidebar />
+        </div>
     </nav>
     <div class="main">
-        <Navbar/>
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle">
+                <i class="hamburger align-self-center"></i>
+            </a>
+            <Navbar />
+        </nav>
         <main class="content">
             <AppErrorBoundary>
                 <ChildContent>

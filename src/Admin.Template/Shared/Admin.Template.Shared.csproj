@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Extensions\" />
+    <Folder Include="Extensions\Entity\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 </Project>

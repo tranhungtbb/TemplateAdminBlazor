@@ -33,6 +33,12 @@
 	<ItemGroup>
 		<None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Interceptors\" />
+	  <Folder Include="Security\" />
+	  <Folder Include="Features\Products\Models\Validators\" />
+	</ItemGroup>
 	<!--<Target Name="GeneratNSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
 		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) aspnetcore2openapi /project:$(AssemblyName).csproj /nobuild:true /documentName:v1 /output:OAS_v1.json" />
 	</Target>-->

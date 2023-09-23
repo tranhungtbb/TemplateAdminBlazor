@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Products\ProductList.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.7" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.7" />
@@ -17,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Admin.Template.ApiClient\Admin.Template.ApiClient.csproj" />
     <ProjectReference Include="..\Admin.Template.Component\Admin.Template.Component.csproj" />
     <ProjectReference Include="..\Shared\Admin.Template.Shared.csproj" />
   </ItemGroup>
@@ -26,10 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Products\Validators\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
   <ItemGroup>
 	<!-- https://github.com/dotnet/aspnetcore/issues/33312 -->
 	<TrimmerRootAssembly Include="Microsoft.Authentication.WebAssembly.Msal" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pages\Products\ProductList.razor" />
   </ItemGroup>
 </Project>

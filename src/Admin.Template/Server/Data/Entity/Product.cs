@@ -1,8 +1,6 @@
-﻿using Admin.Template.Shared.Models.Entity;
+﻿namespace Admin.Template.Server.Data.Entity;
 
-namespace Admin.Template.Server.Data.Entity;
-
-public class Product : EntityBase
+public class Product : EntityBase, IHasTrace, IHasIsDeleted, IHasCreationTime, IHasModifyTime
 {
     public string Name { get; set; }
 
@@ -14,5 +12,19 @@ public class Product : EntityBase
 
     public decimal Price { get; set; }
 
-    public List<ProductImage>? Pictures { get; set; }
+    public long? CreateBy { get; set; }
+
+    public string CreateByName { get; set; }
+
+    public long? ModifyBy { get; set; }
+
+    public string ModifyByName { get; set; }
+
+    public bool IsDeleted { get; set; }
+
+    public DateTime? ModifyDate { get; set; }
+
+    public DateTime Created { get; set; }
+
+    public virtual ICollection<ProductImage> ProductImages { get; set; }
 }

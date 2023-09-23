@@ -12,6 +12,5 @@
 
   <ItemGroup>
     <Folder Include="Extensions\Entity\" />
-    <Folder Include="Constants\" />
   </ItemGroup>
 </Project>

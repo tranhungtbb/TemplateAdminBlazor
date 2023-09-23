@@ -1,6 +1,6 @@
 ﻿namespace Admin.Template.Shared.Interfaces;
 
-public interface HasIsDeleted
+public interface IHasIsDeleted
 {
     public bool IsDeleted { get; set; }
 }

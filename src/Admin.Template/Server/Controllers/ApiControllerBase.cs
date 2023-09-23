@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Admin.Template.Server.Controllers;
 
 [ApiController]
-public class ApiControllerBase : ControllerBase
+public abstract class ApiControllerBase : ControllerBase
 {
     public ApiControllerBase(ApplicationDbContext context)
     {
         Context = context;
     }
 
-    public ApplicationDbContext Context { get; }
+    protected ApplicationDbContext Context { get; }
 }

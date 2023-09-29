@@ -1,6 +1,8 @@
 ﻿using Admin.Template.Server.Data;
+using Admin.Template.Server.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Admin.Template.Server
@@ -24,6 +26,8 @@ namespace Admin.Template.Server
                 {
                     options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
 
             // Add services to the container.
@@ -46,7 +50,9 @@ namespace Admin.Template.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddServices();
             services.AddValidators();
+
             services.AddOpenApiDocument();
 
         }

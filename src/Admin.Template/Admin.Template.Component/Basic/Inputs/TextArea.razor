@@ -1,0 +1,13 @@
+﻿@inherits InputBase<string>
+
+<div class="form-group">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-label">@Label</label>
+    }
+    <textarea class="form-control autosize no-outline" rows="@Rows" @bind="@CurrentValue"></textarea>
+    @if (ValidationFor != null)
+    {
+        <ValidationMessage For="@ValidationFor" />
+    }
+</div>

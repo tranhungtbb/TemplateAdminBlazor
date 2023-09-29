@@ -28,7 +28,9 @@ public class ProductsController : ApiControllerBase
                 Description = "text lorem ipsum dolor sit amet",
                 Unit = "Nomal",
                 Brand = "Adidas",
-                Price = 1200
+                Price = 1200,
+                Created = DateTime.Now,
+                CreateByName = "Admin",
             },
             new ProductModel()
             {
@@ -37,6 +39,8 @@ public class ProductsController : ApiControllerBase
                 Unit = "Nomal",
                 Brand = "Adidas",
                 Price = 1200,
+                Created = DateTime.Now,
+                CreateByName = "Admin",
             },
             new ProductModel()
             {
@@ -45,6 +49,8 @@ public class ProductsController : ApiControllerBase
                 Unit = "Nomal",
                 Brand = "Adidas",
                 Price = 1200,
+                Created = DateTime.Now,
+                CreateByName = "Admin",
             },
             new ProductModel()
             {
@@ -53,26 +59,12 @@ public class ProductsController : ApiControllerBase
                 Unit = "Nomal",
                 Brand = "Adidas",
                 Price = 1200,
-            },
-            new ProductModel()
-            {
-                Name = "Idea Outfitters",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-            },
-            new ProductModel()
-            {
-                Name = "The Inventors Nest",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
+                Created = DateTime.Now,
+                CreateByName = "Admin",
             },
         };
 
-        var result = await products
+        var result = products
             .AsQueryable()
             .ToPageResult(filter);
 

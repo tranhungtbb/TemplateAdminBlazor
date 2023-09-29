@@ -18,10 +18,12 @@ public partial class Panel
 	public void Open()
 	{
 		this.IsOpen = true;
+		this.StateHasChanged();
 	}
 
 	public void Close()
 	{
 		this.IsOpen = false;
+		this.StateHasChanged();
 	}
 }

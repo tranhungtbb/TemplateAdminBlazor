@@ -1,11 +1,13 @@
-﻿<li class="breadcrumb-item @(Active ? "active" : "")">
+﻿@inject NavigationManager Navigation
+
+<li class="breadcrumb-item @(Active ? "active" : "")">
     @if (string.IsNullOrEmpty(Path))
     {
         @Title
     }
     else
     {
-        <a href="@Path">@Title</a>
+        <a href="@Path" class="pe-auto" @onclick="() => Navigation.NavigateTo(Path)">@Title</a>
     }
 </li>
 

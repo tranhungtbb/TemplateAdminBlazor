@@ -5,6 +5,9 @@ namespace Admin.Template.Component.Basic;
 
 public partial class Button : ComponentBase
 {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+
     [Parameter]
     public string Appearance { get; set; } = Constants.Appearance.Primary;
 

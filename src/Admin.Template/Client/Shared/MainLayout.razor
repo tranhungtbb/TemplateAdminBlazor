@@ -1,14 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="wrapper">
-    <nav id="sidebar" class="sidebar">
+    <nav id="sidebar" class="sidebar @(isOpen == true ? "collapsed" : string.Empty)">
         <div class="sidebar-content js-simplebar">
             <Sidebar />
         </div>
     </nav>
     <div class="main">
         <nav class="navbar navbar-expand navbar-light navbar-bg">
-            <a class="sidebar-toggle">
+            <a class="sidebar-toggle" @onclick="CollapseSidebar">
                 <i class="hamburger align-self-center"></i>
             </a>
             <Navbar />
@@ -25,3 +25,13 @@
         </main>
     </div>
 </div>
+
+@code {
+    private bool isOpen { get; set; }
+
+    void CollapseSidebar()
+    {
+        isOpen =! isOpen;
+        this.StateHasChanged();
+    }
+}

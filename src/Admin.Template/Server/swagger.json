@@ -1,0 +1,393 @@
+{
+  "x-generator": "NSwag v13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/_configuration/{clientId}": {
+      "get": {
+        "tags": [
+          "OidcConfiguration"
+        ],
+        "operationId": "OidcConfiguration_GetClientRequestParameters",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/api/Products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_List",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Name",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Description",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Unit",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Brand",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "number",
+            "name": "Price",
+            "in": "query",
+            "format": "decimal",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Created",
+            "in": "query",
+            "format": "date-time",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "PageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "integer",
+            "name": "PageIndex",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Search",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "OrderBy",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedResultModelOfProductModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Insert",
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateProductModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProductModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Update",
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateProductModel"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProductModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Delete",
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityBase"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProductModel"
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/Get/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "int64",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProductModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PagedResultModelOfProductModel": {
+      "type": "object",
+      "required": [
+        "Items",
+        "PageSize",
+        "PageIndex",
+        "TotalCount"
+      ],
+      "properties": {
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductModel"
+          }
+        },
+        "PageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "PageIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TotalCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProductModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "Name",
+            "Price",
+            "IsDeleted",
+            "Created"
+          ],
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            },
+            "Unit": {
+              "type": "string"
+            },
+            "Brand": {
+              "type": "string"
+            },
+            "Price": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "CreateBy": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "CreateByName": {
+              "type": "string"
+            },
+            "ModifyBy": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "ModifyByName": {
+              "type": "string"
+            },
+            "IsDeleted": {
+              "type": "boolean"
+            },
+            "ModifyDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "Created": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      ]
+    },
+    "EntityBase": {
+      "type": "object",
+      "required": [
+        "Id"
+      ],
+      "properties": {
+        "Id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CreateProductModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "Name",
+            "Price"
+          ],
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            },
+            "Unit": {
+              "type": "string"
+            },
+            "Brand": {
+              "type": "string"
+            },
+            "Price": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      ]
+    },
+    "UpdateProductModel": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "Name",
+            "Price"
+          ],
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Description": {
+              "type": "string"
+            },
+            "Unit": {
+              "type": "string"
+            },
+            "Brand": {
+              "type": "string"
+            },
+            "Price": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

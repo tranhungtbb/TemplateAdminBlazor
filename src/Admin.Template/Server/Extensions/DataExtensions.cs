@@ -11,21 +11,21 @@ public static class DataExtensions
         {
             query = query.OrderBy(s => s.GetType().GetProperty(filter.OrderBy).GetValue(s, null));
         }
-        
+
         query = query.Skip(filter.PageSize ?? 10 * filter.PageIndex ?? 0)
             .Take(filter.PageSize ?? 10);
         return query;
     }
 
-    public static async Task<PagedResultModel<T>> ToPageResult<T>(this IQueryable<T> query, PagedResultRequestModel filter)
+    public static PagedResultModel<T> ToPageResult<T>(this IQueryable<T> query, PagedResultRequestModel filter)
         where T : EntityBase
     {
         return new PagedResultModel<T>
         {
-            Items = query.ToPageList(filter),
-            TotalCount = await query.LongCountAsync(),
-            PageIndex = filter.PageIndex,
-            PageSize = filter.PageSize,
+            Items = query.ToList(),
+            TotalCount = query.Count(),
+            PageIndex = filter.PageIndex ?? 1,
+            PageSize = filter.PageSize ?? 10,
         };
     }
 }

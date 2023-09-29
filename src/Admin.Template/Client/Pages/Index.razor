@@ -1,9 +1,25 @@
 ﻿@page "/"
 
+@inject NavigationManager Navigation
+
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
+<Button @onclick="NavigateHome">Index</Button>
+
+<Button @onclick="NavigateToProduct">products</Button>
+
+<Button @onclick="NavigateToCounter">Counter</Button>
+
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    void NavigateHome() => Navigation.NavigateTo("/");
+
+    void NavigateToProduct() => Navigation.NavigateTo("/product/lists");
+
+    void NavigateToCounter() => Navigation.NavigateTo("/counter");
+}

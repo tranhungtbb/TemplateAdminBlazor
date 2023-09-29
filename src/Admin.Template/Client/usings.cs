@@ -10,4 +10,6 @@ global using Admin.Template.Component.Basic.Buttons;
 global using Admin.Template.Client;
 global using Admin.Template.Client.Shared;
 
+global using Admin.Template.Shared.Interfaces;
+
 

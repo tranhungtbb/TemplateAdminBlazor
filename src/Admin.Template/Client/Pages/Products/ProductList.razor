@@ -1,3 +1,63 @@
-﻿@page "/products"
+﻿@page "/product/lists"
+@using Admin.Template.Client.Pages.Products.Models;
+@inherits PageBase
 
-<h3>Lists</h3>
+<div class="container-fluid p-0">
+    <Breadcrumbs>
+        <BreadcrumbItem Title="Products" />
+         <BreadcrumbItem Title="List" Active="true" />
+    </Breadcrumbs>
+    <Row>
+        <Column CssClass="col-12 col-xl-12">
+            <Card>
+                <CardHeader>
+                    <h5 class="card-title mb-2">Product List</h5>
+                </CardHeader>
+                <CardBody>
+                    <DataTable Data="products?.Items" Count="products?.TotalCount" PageSize="pageSize"
+                        LoadData="@LoadData"
+                        OnClickFilter="() => panelFilter.Open()">
+                        <DataTableHeader>
+                            <Th>Name</Th>
+                            <Th>Description</Th>
+                            <Th>Unit</Th>
+                            <Th>Brand</Th>
+                            <Th>Price</Th>
+                            <Th>Created</Th>
+                            <Th>Actions</Th>
+                        </DataTableHeader>
+                        <DataTableItems>
+                            <Td>@context.Name</Td>
+                            <Td>@context.Description</Td>
+                            <Td>@context.Unit</Td>
+                            <Td>@context.Brand</Td>
+                            <Td>@context.Price</Td>
+                            <Td>@context.Created</Td>
+                            <Td CssClass="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </Td>
+                        </DataTableItems>
+                    </DataTable>
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
+</div>
+
+<Panel Title="Filter" @ref="panelFilter">
+    <PanelBody>
+        <EditForm EditContext="@filterContext">
+            @* <FluentValidator /> *@
+            <TextBox @bind-Value="filterModel.Name" Label="Name" />
+            <TextBox @bind-Value="filterModel.Unit" Label="Unit" />
+            <TextBox @bind-Value="filterModel.Brand" Label="Brand" />
+            <TextBox @bind-Value="filterModel.Price" Label="Price" />
+            <TextArea @bind-Value="filterModel.Description" Rows="3" Label="Description" />
+        </EditForm>
+    </PanelBody>
+    <PanelFooter>
+        <Button Appearance="@Appearance.Primary" @onclick="ClearFilter">Clear</Button>
+        <Button @onclick="Filter">Filter</Button>
+    </PanelFooter>
+</Panel>

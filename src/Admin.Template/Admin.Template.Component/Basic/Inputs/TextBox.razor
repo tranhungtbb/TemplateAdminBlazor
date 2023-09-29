@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@inherits InputBase<TValue>
+@typeparam TValue
+
+<div class="form-group">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-label">@Label</label>
+    }
+    <input type="@InputType" class="form-control"
+           id="@Id" @bind="@CurrentValue" @attributes="AdditionalAttributes" placeholder="@Placeholder" />
+    @if (ValidationFor != null)
+    {
+        <ValidationMessage For="@ValidationFor" />
+    }
+</div>

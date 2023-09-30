@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using Admin.Template.Server.Data.Entity;
+using Admin.Template.Server.Extensions;
 
 namespace Admin.Template.Server.Data;
 
@@ -20,5 +21,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        builder.SeedDatas();
     }
 }

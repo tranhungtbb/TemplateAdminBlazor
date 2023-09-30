@@ -39,6 +39,8 @@ public partial class TextBox<TValue> : InputBase<TValue>
     [Inject]
     private IJSRuntime JSInterop { get; set; }
 
+    private ValidationMessageStore validationMessageStore;
+
     public async Task Focus()
     {
         await this.JSInterop.InvokeVoidAsync("jsfunction.focusElement", this.Id);
@@ -50,6 +52,7 @@ public partial class TextBox<TValue> : InputBase<TValue>
 
         if (this.EditContext != null)
         {
+            validationMessageStore = new ValidationMessageStore(this.EditContext);
             this.EditContext.OnFieldChanged += this.FieldValueChanged;
         }
     }
@@ -65,13 +68,14 @@ public partial class TextBox<TValue> : InputBase<TValue>
         {
             result = parsedValue;
             validationErrorMessage = null;
+            this.validationMessageStore.Clear(this.FieldIdentifier);
             return true;
         }
         else
         {
             result = default;
             validationErrorMessage = this.FieldIdentifier.FieldName + " value is not valid";
-
+            this.validationMessageStore.Add(this.FieldIdentifier, validationErrorMessage);
             return false;
         }
     }

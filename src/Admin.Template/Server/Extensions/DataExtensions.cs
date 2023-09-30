@@ -19,8 +19,12 @@ public static class DataExtensions
     public static IQueryable<T> ToPageList<T>(this IQueryable<T> query, PagedResultRequestModel filter)
         where T : EntityBase
     {
-        query = query.Skip(filter.PageSize ?? 10 * filter.PageIndex ?? 0)
-            .Take(filter.PageSize ?? 10);
+        int pageIndex = filter.PageIndex ?? 0;
+        pageIndex = pageIndex <= 1 ? 0 : pageIndex - 1;
+
+        int  pageSize = filter.PageSize ?? 10;
+        query = query.Skip(pageSize * pageIndex)
+            .Take(pageSize);
         return query;
     }
 

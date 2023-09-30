@@ -14,10 +14,6 @@ public abstract class PageBase : ComponentBase, IDisposable
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-        if(firstRender)
-        {
-            await JS.InvokeAsync<object>("feather.replace");
-        }
     }
 
     public void Dispose()

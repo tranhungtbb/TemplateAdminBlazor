@@ -7,7 +7,7 @@ public partial class ProductList : PageBase
 {
     private ListProductViewModel products;
 
-    private int pageSize = 10, pageIndex = 1;
+    private int pageSize = 2, pageIndex = 1;
 
     private FilterProductModel filterModel = new();
 

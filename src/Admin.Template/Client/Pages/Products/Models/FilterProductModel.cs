@@ -6,9 +6,9 @@ public class FilterProductModel
     public string? Description { get; set; }
     public string? Unit { get; set; }
     public string? Brand { get; set; }
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 
-    public DateTimeOffset Created { get; set; }
+    public DateTimeOffset? Created { get; set; }
 
     public string? Search { get; set; }
 

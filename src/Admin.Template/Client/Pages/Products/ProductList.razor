@@ -52,7 +52,7 @@
             <TextBox @bind-Value="filterModel.Name" Label="Name" />
             <TextBox @bind-Value="filterModel.Unit" Label="Unit" />
             <TextBox @bind-Value="filterModel.Brand" Label="Brand" />
-            <TextBox @bind-Value="filterModel.Price" Label="Price" />
+            <TextBox @bind-Value="filterModel.Price" ValidationFor="@(() => filterModel.Price)" Label="Price" />
             <TextArea @bind-Value="filterModel.Description" Rows="3" Label="Description" />
         </EditForm>
     </PanelBody>

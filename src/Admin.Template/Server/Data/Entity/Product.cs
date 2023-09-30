@@ -25,6 +25,4 @@ public class Product : EntityBase, IHasTrace, IHasIsDeleted, IHasCreationTime, I
     public DateTime? ModifyDate { get; set; }
 
     public DateTime Created { get; set; }
-
-    public virtual ICollection<ProductImage> ProductImages { get; set; }
 }

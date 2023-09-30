@@ -1,7 +1,10 @@
 ﻿using Admin.Template.Server.Controllers;
 using Admin.Template.Server.Data;
+using Admin.Template.Server.Data.Entity;
 using Admin.Template.Server.Features.Products.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Admin.Template.Server.Features.Products;
 
@@ -9,64 +12,29 @@ namespace Admin.Template.Server.Features.Products;
 [Route("api/[controller]")]
 public class ProductsController : ApiControllerBase
 {
-    private readonly ApplicationDbContext context;
-
-    public ProductsController(ApplicationDbContext context)
-        : base(context)
+    public ProductsController(ApplicationDbContext context, IMapper mapper) 
+        : base(context, mapper)
     {
-        this.context = context;
     }
 
     [HttpGet]
     public async Task<PagedResultModel<ProductModel>> List([FromQuery] PagedProductResultRequestModel filter)
     {
-        var products = new List<ProductModel>
-        {
-            new ProductModel()
-            {
-                Name = "Tech Toys",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-            },
-            new ProductModel()
-            {
-                Name = "Crazy Creations",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-            },
-            new ProductModel()
-            {
-                Name = "Innovative Imaginings",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-            },
-            new ProductModel()
-            {
-                Name = "Design Den",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-            },
-        };
+        var query = this.Context.Products
+            .Filter(filter.Search, 
+                x => x.Name.Contains(filter.Search)
+                || x.Description.Contains(filter.Search)
+                || x.Unit.Contains(filter.Search)
+                || x.Brand.Contains(filter.Search))
+            .Filter(filter.Name, x=>x.Name.Contains(filter.Name))
+            .Filter(filter.Description, x => x.Description.Contains(filter.Description))
+            .Filter(filter.Unit, x => x.Unit.Contains(filter.Unit))
+            .Filter(filter.Brand, x => x.Brand.Contains(filter.Brand))
+            .Filter(filter.Price, x => x.Price == filter.Price)
+            .OrderBy(filter.OrderBy);
 
-        var result = products
-            .AsQueryable()
-            .ToPageResult(filter);
+        var result = await this.Map<Product, ProductModel>(query.ToPageList(filter))
+            .ToPageResult(await query.CountAsync(), filter);
 
         return result;
     }

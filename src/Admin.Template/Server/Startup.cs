@@ -52,6 +52,7 @@ namespace Admin.Template.Server
 
             services.AddServices();
             services.AddValidators();
+            services.AddAutoMapper(this.GetType().Assembly);
 
             services.AddOpenApiDocument();
 

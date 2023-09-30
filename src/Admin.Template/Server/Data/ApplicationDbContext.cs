@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
-using Admin.Template.Server.Models;
+using Admin.Template.Server.Data.Entity;
 
 namespace Admin.Template.Server.Data;
 
@@ -12,5 +12,13 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         DbContextOptions options,
         IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
     {
+    }
+
+    public DbSet<Product> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
     }
 }

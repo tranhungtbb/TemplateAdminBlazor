@@ -3,9 +3,13 @@
 <div class="form-group">
     @if (!string.IsNullOrWhiteSpace(Label))
     {
-        <label class="form-label">@Label</label>
+        <label class="form-label mb-0">@Label</label>
     }
-    <textarea class="form-control autosize no-outline" rows="@Rows" @bind="@CurrentValue"></textarea>
+    <textarea class="form-control autosize no-outline @(isValid ? string.Empty : "is-invalid")" rows="@Rows" @bind="@CurrentValue"></textarea>
+    @if (!string.IsNullOrEmpty(TextMuted))
+    {
+        <small class="form-text text-muted">@TextMuted</small>
+    }
     @if (ValidationFor != null)
     {
         <ValidationMessage For="@ValidationFor" />

@@ -16,3 +16,12 @@
     right: 0.75rem;
     top: 0.5rem;
 }
+
+.validation-message
+{
+    width: 100%;
+    font-size: 80%;
+    color: #d9534f;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}

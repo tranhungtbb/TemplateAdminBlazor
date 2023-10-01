@@ -5,10 +5,14 @@
 <div class="form-group">
     @if (!string.IsNullOrWhiteSpace(Label))
     {
-        <label class="form-label">@Label</label>
+        <label class="form-label mb-0">@Label</label>
     }
-    <input type="@InputType" class="form-control"
-           id="@Id" @bind="@CurrentValue" @attributes="AdditionalAttributes" placeholder="@Placeholder" />
+    <input type="@InputType" class="form-control @(isValid ? string.Empty : "is-invalid")" id="@Id" @bind="@CurrentValue" @attributes="AdditionalAttributes"
+        placeholder="@Placeholder" />
+    @if (!string.IsNullOrEmpty(TextMuted))
+    {
+        <small class="form-text text-muted">@TextMuted</small>
+    }
     @if (ValidationFor != null)
     {
         <ValidationMessage For="@ValidationFor" />

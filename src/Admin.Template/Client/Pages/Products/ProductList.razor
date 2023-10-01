@@ -11,7 +11,10 @@
         <Column CssClass="col-12 col-xl-12">
             <Card>
                 <CardHeader>
-                    <h5 class="card-title mb-2">Product List</h5>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title mb-2">Product List</h5>
+                        <Button @onclick="NavigateToCreate">Add</Button>
+                    </div>
                 </CardHeader>
                 <CardBody>
                     <DataTable Data="products?.Items" Count="products?.TotalCount" PageSize="pageSize"
@@ -34,8 +37,8 @@
                             <Td>@context.Price</Td>
                             <Td>@context.Created</Td>
                             <Td CssClass="table-action">
-                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
-                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                                <a @onclick="() => NavigateToUpdate(context)"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a><i class="align-middle" data-feather="trash"></i></a>
                             </Td>
                         </DataTableItems>
                     </DataTable>
@@ -48,7 +51,6 @@
 <Panel Title="Filter" @ref="panelFilter">
     <PanelBody>
         <EditForm EditContext="@filterContext">
-            @* <FluentValidator /> *@
             <TextBox @bind-Value="filterModel.Name" Label="Name" />
             <TextBox @bind-Value="filterModel.Unit" Label="Unit" />
             <TextBox @bind-Value="filterModel.Brand" Label="Brand" />

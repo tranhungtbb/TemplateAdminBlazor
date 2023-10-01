@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Admin.Template.Client;
 using Admin.Template.Component.Extensions;
 using Admin.Template.Client.Extensions;
+using FluentValidation;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -24,6 +24,8 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 builder.Services.AddApiClients(httpClientName);
 
 builder.Services.AddApiAuthorization();
+
 builder.Services.UseComponentService();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 await builder.Build().RunAsync();

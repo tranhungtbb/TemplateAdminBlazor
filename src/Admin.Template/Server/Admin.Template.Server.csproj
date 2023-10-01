@@ -4,6 +4,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>preview</LangVersion>
 		<UserSecretsId>Template.Admin.Server-078cbd20-bc7d-4f4e-b8d4-398edc3283d1</UserSecretsId>
 	</PropertyGroup>
 

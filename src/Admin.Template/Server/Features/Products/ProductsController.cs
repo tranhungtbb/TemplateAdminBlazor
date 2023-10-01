@@ -49,7 +49,10 @@ public class ProductsController : ApiControllerBase
             Description = "text lorem ipsum dolor sit amet",
             Unit = "Nomal",
             Brand = "Adidas",
-            Price = 1200
+            Price = 1200,
+            Created = DateTime.Now,
+            CreateByName = "Admin",
+            ModifyByName = "Admin",
         };
     }
 
@@ -57,12 +60,7 @@ public class ProductsController : ApiControllerBase
     public async Task<ActionResult<ProductModel>> Insert([FromBody] CreateProductModel model,
         [FromServices] IValidator<CreateProductModel> createProductValidator)
     {
-        var result = await createProductValidator.ValidateAsync(model);
-
-        if (!result.IsValid)
-        {
-            return this.Failed(result);
-        }
+        await createProductValidator.ValidateAndThrowAsync(model);
 
         return new ProductModel()
         {
@@ -71,7 +69,10 @@ public class ProductsController : ApiControllerBase
             Description = "text lorem ipsum dolor sit amet",
             Unit = "Nomal",
             Brand = "Adidas",
-            Price = 1200
+            Price = 1200,
+            Created = DateTime.Now,
+            CreateByName = "Admin",
+            ModifyByName = "Admin",
         };
     }
 
@@ -79,12 +80,7 @@ public class ProductsController : ApiControllerBase
     public async Task<ActionResult<ProductModel>> Update([FromBody] UpdateProductModel model,
         [FromServices] IValidator<UpdateProductModel> validator)
     {
-        var result = await validator.ValidateAsync(model);
-
-        if (!result.IsValid)
-        {
-            return this.Failed(result);
-        }
+        await validator.ValidateAndThrowAsync(model);
 
         return new ProductModel()
         {
@@ -93,7 +89,10 @@ public class ProductsController : ApiControllerBase
             Description = "text lorem ipsum dolor sit amet",
             Unit = "Nomal",
             Brand = "Adidas",
-            Price = 1200
+            Price = 1200,
+            Created = DateTime.Now,
+            CreateByName = "Admin",
+            ModifyByName = "Admin",
         };
     }
 
@@ -107,7 +106,10 @@ public class ProductsController : ApiControllerBase
             Description = "text lorem ipsum dolor sit amet",
             Unit = "Nomal",
             Brand = "Adidas",
-            Price = 1200
+            Price = 1200,
+            Created = DateTime.Now,
+            CreateByName = "Admin",
+            ModifyByName = "Admin",
         };
     }
 }

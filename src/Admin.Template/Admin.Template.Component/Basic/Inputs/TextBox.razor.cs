@@ -8,11 +8,16 @@ namespace Admin.Template.Component.Basic.Inputs;
 
 public partial class TextBox<TValue> : InputBase<TValue>
 {
+    private bool isValid = true;
+
     [Parameter]
     public string Id { get; set; } = Guid.NewGuid().ToString().Replace("-", string.Empty);
 
     [Parameter]
     public string Label { get; set; }
+
+    [Parameter]
+    public string TextMuted { get; set; }
 
     [Parameter]
     public Expression<Func<TValue>> ValidationFor { get; set; }
@@ -54,6 +59,7 @@ public partial class TextBox<TValue> : InputBase<TValue>
         {
             validationMessageStore = new ValidationMessageStore(this.EditContext);
             this.EditContext.OnFieldChanged += this.FieldValueChanged;
+            this.EditContext.OnValidationRequested += this.ValidationRequested;
         }
     }
 
@@ -69,6 +75,7 @@ public partial class TextBox<TValue> : InputBase<TValue>
             result = parsedValue;
             validationErrorMessage = null;
             this.validationMessageStore.Clear(this.FieldIdentifier);
+            this.EditContext.NotifyValidationStateChanged();
             return true;
         }
         else
@@ -76,6 +83,7 @@ public partial class TextBox<TValue> : InputBase<TValue>
             result = default;
             validationErrorMessage = this.FieldIdentifier.FieldName + " value is not valid";
             this.validationMessageStore.Add(this.FieldIdentifier, validationErrorMessage);
+            this.EditContext.NotifyValidationStateChanged();
             return false;
         }
     }
@@ -89,6 +97,7 @@ public partial class TextBox<TValue> : InputBase<TValue>
             if (this.EditContext != null)
             {
                 this.EditContext.OnFieldChanged -= this.FieldValueChanged;
+                this.EditContext.OnValidationRequested -= this.ValidationRequested;
             }
         }
     }
@@ -101,6 +110,19 @@ public partial class TextBox<TValue> : InputBase<TValue>
             {
                 this.OnValueChanged.InvokeAsync(sender);
             }
+
+            if(EditContext != null)
+            {
+                this.isValid = !this.EditContext.GetValidationMessages(this.FieldIdentifier).Any();
+            }
+        }
+    }
+
+    private void ValidationRequested(object sender, ValidationRequestedEventArgs args)
+    {
+        if(EditContext != null)
+        {
+            this.isValid = !this.EditContext.GetValidationMessages(this.FieldIdentifier).Any();
         }
     }
 

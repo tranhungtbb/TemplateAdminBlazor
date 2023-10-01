@@ -1,0 +1,36 @@
+@page "/product/add"
+
+@inherits PageBase
+
+<div class="container-fluid p-0">
+    <Breadcrumbs>
+        <BreadcrumbItem Title="Products" />
+        <BreadcrumbItem Title="Add" Active="true" />
+    </Breadcrumbs>
+    <Card>
+        <CardHeader>
+            <h5 class="card-title mb-0">Add Product</h5>
+        </CardHeader>
+        <CardBody>
+            <EditForm EditContext="@Context">
+                <FluentValidator Validator="Validator" />
+                <Row>
+                    <Column CssClass="col-12 col-xl-6">
+                        <TextBox @bind-Value="model.Name" Label="Product Name" ValidationFor="() => model.Name"
+                            TextMuted="Example block-level help text here."></TextBox>
+                        <TextBox @bind-Value="model.Unit" Label="Unit" ValidationFor="() => model.Unit"></TextBox>
+                        <TextBox @bind-Value="model.Brand" Label="Brand" ValidationFor="() => model.Brand"></TextBox>
+                        <TextBox @bind-Value="model.Price" Label="Price" ValidationFor="() => model.Price"></TextBox>
+                    </Column>
+                    <Column CssClass="col-12 col-xl-6">
+                        <TextArea @bind-Value="model.Description" Label="Description" Rows="6"
+                            ValidationFor="() => model.Description"></TextArea>
+                    </Column>
+                </Row>
+            </EditForm>
+        </CardBody>
+        <CardFooter CssClass="d-flex justify-content-end">
+            <Button @onclick="OnSubmit">Sutmit</Button>
+        </CardFooter>
+    </Card>
+</div>

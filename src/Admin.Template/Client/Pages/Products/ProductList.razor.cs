@@ -81,4 +81,14 @@ public partial class ProductList : PageBase
         this.filterContext = new EditContext(filterModel);
         this.StateHasChanged();
     }
+
+    private void NavigateToCreate()
+    {
+        this.Navigation.NavigateTo("/product/add");
+    }
+
+    private void NavigateToUpdate(ProductViewModel item)
+    {
+        this.Navigation.NavigateTo($"/product/edit/{item.Id}");
+    }
 }

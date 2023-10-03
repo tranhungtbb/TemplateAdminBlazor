@@ -12,7 +12,7 @@ namespace Admin.Template.Server.Features.Products;
 [Route("api/[controller]")]
 public class ProductsController : ApiControllerBase
 {
-    public ProductsController(ApplicationDbContext context, IMapper mapper) 
+    public ProductsController(ApplicationDbContext context, IMapper mapper)
         : base(context, mapper)
     {
     }
@@ -21,12 +21,12 @@ public class ProductsController : ApiControllerBase
     public async Task<PagedResultModel<ProductModel>> List([FromQuery] PagedProductResultRequestModel filter)
     {
         var query = this.Context.Products
-            .Filter(filter.Search, 
+            .Filter(filter.Search,
                 x => x.Name.Contains(filter.Search)
                 || x.Description.Contains(filter.Search)
                 || x.Unit.Contains(filter.Search)
                 || x.Brand.Contains(filter.Search))
-            .Filter(filter.Name, x=>x.Name.Contains(filter.Name))
+            .Filter(filter.Name, x => x.Name.Contains(filter.Name))
             .Filter(filter.Description, x => x.Description.Contains(filter.Description))
             .Filter(filter.Unit, x => x.Unit.Contains(filter.Unit))
             .Filter(filter.Brand, x => x.Brand.Contains(filter.Brand))
@@ -42,18 +42,14 @@ public class ProductsController : ApiControllerBase
     [HttpGet("Get/{id:long}")]
     public async Task<ProductModel> Get(long id)
     {
-        return new ProductModel()
+        var model = await this.Context.Products.GetById(id);
+
+        if (model == null)
         {
-            Id = 1,
-            Name = "Tech Toys",
-            Description = "text lorem ipsum dolor sit amet",
-            Unit = "Nomal",
-            Brand = "Adidas",
-            Price = 1200,
-            Created = DateTime.Now,
-            CreateByName = "Admin",
-            ModifyByName = "Admin",
-        };
+            throw new ValidationException($"Not exists product with id equal {id}");
+        }
+
+        return this.Map<Product, ProductModel>(model);
     }
 
     [HttpPost]
@@ -61,19 +57,13 @@ public class ProductsController : ApiControllerBase
         [FromServices] IValidator<CreateProductModel> createProductValidator)
     {
         await createProductValidator.ValidateAndThrowAsync(model);
+        
+        var product = this.Map<CreateProductModel,Product>(model);
 
-        return new ProductModel()
-        {
-            Id = 1,
-            Name = "Tech Toys",
-            Description = "text lorem ipsum dolor sit amet",
-            Unit = "Nomal",
-            Brand = "Adidas",
-            Price = 1200,
-            Created = DateTime.Now,
-            CreateByName = "Admin",
-            ModifyByName = "Admin",
-        };
+        await this.Context.Products.AddAsync(product);
+        await this.Context.SaveChangesAsync();
+
+        return this.Map<Product,ProductModel>(product);
     }
 
     [HttpPut]
@@ -82,34 +72,32 @@ public class ProductsController : ApiControllerBase
     {
         await validator.ValidateAndThrowAsync(model);
 
-        return new ProductModel()
+        var entity = await this.Context.Products.GetById(model.Id);
+
+        if (entity == null)
         {
-            Id = 1,
-            Name = "Tech Toys",
-            Description = "text lorem ipsum dolor sit amet",
-            Unit = "Nomal",
-            Brand = "Adidas",
-            Price = 1200,
-            Created = DateTime.Now,
-            CreateByName = "Admin",
-            ModifyByName = "Admin",
-        };
+            throw new ValidationException($"Not exists product with id equal {model.Id}");
+        }
+
+        await this.Context.SaveChangesAsync();
+
+        return this.Map<Product,ProductModel>(entity);
+
     }
 
     [HttpDelete]
-    public async Task<ActionResult<ProductModel>> Delete(EntityBase model)
+    public async Task<ProductModel> Delete(EntityBase model)
     {
-        return new ProductModel()
+        var entity = await this.Context.Products.GetById(model.Id);
+
+        if (entity == null)
         {
-            Id = 1,
-            Name = "Tech Toys",
-            Description = "text lorem ipsum dolor sit amet",
-            Unit = "Nomal",
-            Brand = "Adidas",
-            Price = 1200,
-            Created = DateTime.Now,
-            CreateByName = "Admin",
-            ModifyByName = "Admin",
-        };
+            throw new ValidationException($"Not exists product with id equal {model.Id}");
+        }
+
+        this.Context.Products.Remove(entity);
+        await this.Context.SaveChangesAsync();
+
+        return this.Map<Product,ProductModel>(entity);
     }
 }

@@ -69,4 +69,16 @@ public static class DataExtensions
         }
         return query.Where(predicate);
     }
+
+    public static async Task<T?> GetById<T>(this IQueryable<T> query, long id)
+        where T : EntityBase
+    {
+        return await query.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public static IQueryable<T> IsActive<T>(this IQueryable<T> query)
+        where T : IHasIsDeleted
+    {
+        return query.Where(x => !x.IsDeleted);
+    }
 }

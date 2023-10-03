@@ -20,4 +20,9 @@ public abstract class ApiControllerBase : ControllerBase
     {
         return mapper.ProjectTo<TDestination>(query);
     }
+
+    protected TDestination Map<TSource, TDestination>(TSource query)
+    {
+        return mapper.Map<TSource, TDestination>(query);
+    }
 }

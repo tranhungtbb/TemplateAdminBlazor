@@ -1,7 +1,4 @@
-﻿using System.Net;
-using FluentValidation.Results;
-
-namespace Admin.Template.Server.Middlewares;
+﻿namespace Admin.Template.Server.Middlewares;
 
 public class ExceptionHandlingMiddleware : IMiddleware
 {

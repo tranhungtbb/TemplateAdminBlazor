@@ -22,5 +22,11 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         builder.SeedDatas();
+        
+        foreach (var type in builder.Model.GetEntityTypes())
+        {
+            if (typeof(IHasIsDeleted).IsAssignableFrom(type.ClrType))
+                builder.IsDeletedFilter(type.ClrType);
+        }
     }
 }

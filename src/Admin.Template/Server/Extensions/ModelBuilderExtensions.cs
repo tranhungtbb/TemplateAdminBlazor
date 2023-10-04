@@ -1,60 +1,24 @@
+using System.Reflection;
 using Admin.Template.Server.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Admin.Template.Server.Extensions;
 
-public static class ModelBuilderExtensions
+public static partial class ModelBuilderExtensions
 {
-    public static void SeedDatas(this ModelBuilder builder)
+    public static void IsDeletedFilter(this ModelBuilder modelBuilder, Type entityType)
     {
-        builder.Entity<Product>().HasData(
-            new Product()
-            {
-                Id = 1,
-                Name = "Tech Toys",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-                ModifyByName = "Admin",
-            },
-            new Product()
-            {
-                Id = 2,
-                Name = "Crazy Creations",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-                ModifyByName = "Admin",
-            },
-            new Product()
-            {
-                Id = 3,
-                Name = "Innovative Imaginings",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-                ModifyByName = "Admin",
-            },
-            new Product()
-            {
-                Id = 4,
-                Name = "Design Den",
-                Description = "text lorem ipsum dolor sit amet",
-                Unit = "Nomal",
-                Brand = "Adidas",
-                Price = 1200,
-                Created = DateTime.Now,
-                CreateByName = "Admin",
-                ModifyByName = "Admin",
-            });
+        IsDeletedFilterMethod.MakeGenericMethod(entityType)
+            .Invoke(null, new object[] { modelBuilder });
+    }
+
+    static readonly MethodInfo IsDeletedFilterMethod = typeof(ModelBuilderExtensions)
+               .GetMethods(BindingFlags.Public | BindingFlags.Static)
+               .Single(t => t.IsGenericMethod && t.Name == "IsDeletedFilter");
+
+    public static void IsDeletedFilter<TEntity>(this ModelBuilder modelBuilder) 
+        where TEntity : class, IHasIsDeleted
+    {
+        modelBuilder.Entity<TEntity>().HasQueryFilter(x => !x.IsDeleted);
     }
 }

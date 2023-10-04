@@ -4,9 +4,9 @@ public interface IHasTrace
 {
     public long? CreateBy { get; set; }
 
-    public string CreateByName { get; set; }
+    public string? CreateByName { get; set; }
 
     public long? ModifyBy { get; set; }
 
-    public string ModifyByName { get; set; }
+    public string? ModifyByName { get; set; }
 }

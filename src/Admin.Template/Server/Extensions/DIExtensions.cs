@@ -8,6 +8,8 @@ public static class DIExtensions
     {
         services.AddScoped<ExceptionHandlingMiddleware>();
 
+        services.AddHttpContextAccessor();
+        services.AddTransient(s => s.GetRequiredService<IHttpContextAccessor>().HttpContext?.User ?? new System.Security.Claims.ClaimsPrincipal());
         return services;
     }
 }

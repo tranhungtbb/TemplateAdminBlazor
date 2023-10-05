@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using Admin.Template.Server.Data.Entity;
-using Admin.Template.Server.Extensions;
+using Admin.Template.Server.Interceptors;
 
 namespace Admin.Template.Server.Data;
 
@@ -22,7 +22,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         builder.SeedDatas();
-        
+
         foreach (var type in builder.Model.GetEntityTypes())
         {
             if (typeof(IHasIsDeleted).IsAssignableFrom(type.ClrType))

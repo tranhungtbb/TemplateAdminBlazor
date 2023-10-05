@@ -79,6 +79,7 @@ public class ProductsController : ApiControllerBase
             throw new ValidationException($"Not exists product with id equal {model.Id}");
         }
 
+        entity = this.From(entity, model);
         await this.Context.SaveChangesAsync();
 
         return this.Map<Product,ProductModel>(entity);

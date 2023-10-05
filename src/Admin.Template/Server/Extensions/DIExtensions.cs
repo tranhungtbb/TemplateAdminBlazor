@@ -1,4 +1,6 @@
-﻿using Admin.Template.Server.Middlewares;
+﻿using Admin.Template.Server.Interceptors;
+using Admin.Template.Server.Middlewares;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Admin.Template.Server.Extensions;
 
@@ -10,6 +12,7 @@ public static class DIExtensions
 
         services.AddHttpContextAccessor();
         services.AddTransient(s => s.GetRequiredService<IHttpContextAccessor>().HttpContext?.User ?? new System.Security.Claims.ClaimsPrincipal());
+        services.AddScoped<ISaveChangesInterceptor, HandlerSaveChangesInterceptor>();
         return services;
     }
 }

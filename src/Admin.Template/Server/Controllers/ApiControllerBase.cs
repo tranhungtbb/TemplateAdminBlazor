@@ -25,4 +25,9 @@ public abstract class ApiControllerBase : ControllerBase
     {
         return mapper.Map<TSource, TDestination>(query);
     }
+
+    protected TDestination From<TDestination>(TDestination destination, object source)
+    {
+        return  (TDestination)mapper.Map(source, destination, source.GetType(), typeof(TDestination));
+    }
 }

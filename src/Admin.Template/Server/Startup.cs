@@ -2,6 +2,8 @@
 using Admin.Template.Server.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -30,11 +32,14 @@ namespace Admin.Template.Server
                     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
 
-            // Add services to the container.
+                        // Add services to the container.
             var connectionString = Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(connectionString));
+            services.AddDbContext<ApplicationDbContext>((provider, options) =>
+            {
+                options.AddInterceptors(provider.GetRequiredService<ISaveChangesInterceptor>());
+                options.UseSqlite(connectionString);
+            });
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

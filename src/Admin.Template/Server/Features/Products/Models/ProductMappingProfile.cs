@@ -9,5 +9,9 @@ public class ProductMappingProfile : Profile
         CreateMap<ProductModel, Product>();
 
         CreateMap<Product, ProductModel>();
+
+        CreateMap<CreateProductModel, Product>();
+
+        CreateMap<UpdateProductModel, Product>();
     }
 }

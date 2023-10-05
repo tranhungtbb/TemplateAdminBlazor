@@ -14,11 +14,11 @@ public class Product : EntityBase, IHasTrace, IHasIsDeleted, IHasCreationTime, I
 
     public long? CreateBy { get; set; }
 
-    public string CreateByName { get; set; }
+    public string? CreateByName { get; set; }
 
     public long? ModifyBy { get; set; }
 
-    public string ModifyByName { get; set; }
+    public string? ModifyByName { get; set; }
 
     public bool IsDeleted { get; set; }
 

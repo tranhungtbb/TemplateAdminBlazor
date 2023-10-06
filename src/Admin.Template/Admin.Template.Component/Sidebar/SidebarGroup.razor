@@ -1,0 +1,27 @@
+<li class="sidebar-item">
+    <a href="#@Id" data-toggle="collapse" class="sidebar-link collapsed">
+        @if(!string.IsNullOrEmpty(IconFeather))
+        {
+            <i class="align-middle" data-feather="@IconFeather"></i> 
+        }
+        <span class="align-middle">@Title</span>
+    </a>
+    <ul id="@Id" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+        @ChildContent
+    </ul>
+</li>
+
+@code {
+    private string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter, EditorRequired]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string IconFeather { get; set; }
+
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; }
+
+
+}

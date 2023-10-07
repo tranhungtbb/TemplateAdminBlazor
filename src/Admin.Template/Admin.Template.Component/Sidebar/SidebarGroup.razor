@@ -1,18 +1,19 @@
 <li class="sidebar-item">
-    <a href="#@Id" data-toggle="collapse" class="sidebar-link collapsed">
+    <a href="#@id" data-toggle="collapse" class="sidebar-link collapsed">
         @if(!string.IsNullOrEmpty(IconFeather))
         {
-            <i class="align-middle" data-feather="@IconFeather"></i> 
+            <i class="align-middle" data-feather="@IconFeather"></i>
         }
         <span class="align-middle">@Title</span>
     </a>
-    <ul id="@Id" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+    <ul id="@id" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
         @ChildContent
     </ul>
 </li>
 
 @code {
-    private string Id { get; set; } = Guid.NewGuid().ToString();
+
+    private string id => Title.Replace(" ","");
 
     [Parameter, EditorRequired]
     public string Title { get; set; }

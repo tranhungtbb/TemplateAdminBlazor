@@ -29,4 +29,4 @@ jobs:
     - name: Build
       run: |
         cd src/Admin.Template/Server
-        dotnet build --no-restore
+        dotnet build --configuration Release --no-restore

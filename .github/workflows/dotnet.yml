@@ -30,3 +30,36 @@ jobs:
       run: |
         cd src/Admin.Template/Server
         dotnet build --configuration Release --no-restore
+
+        - name: Build .NET project
+        run: dotnet publish -c Release -o root
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: root
+        path: root
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: root
+
+    - name: Deploy to GitHub Pages
+      run: |
+        git config --global user.name 'Your Name'
+        git config --global user.email 'your.email@example.com'
+
+        git clone https://github.com/${{ github.repository }}.git gh-pages
+        cd gh-pages
+        git checkout gh-pages
+
+        # Remove existing content (use with caution)
+        # rm -rf *
+
+        # Copy the artifacts to the repository
+        cp -R ../root/* .
+
+        git add .
+        git commit -m 'Update GitHub Pages'
+        git push

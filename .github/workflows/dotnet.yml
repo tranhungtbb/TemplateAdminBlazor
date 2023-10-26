@@ -24,7 +24,7 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: |
-        cd src/Template.Admin
+        cd src/Admin.Template
         dotnet restore
     - name: Build
       run: dotnet build --no-restore

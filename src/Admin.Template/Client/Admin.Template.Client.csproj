@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>preview</LangVersion>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <StaticWebAssetsAdditionalPublishPropertiesToRemove>$(StaticWebAssetsAdditionalPublishPropertiesToRemove);SelfContained</StaticWebAssetsAdditionalPublishPropertiesToRemove>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,9 +33,5 @@
     <Folder Include="Models\" />
     <Folder Include="Pages\Products\Validators\" />
     <Folder Include="wwwroot\css\" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- https://github.com/dotnet/aspnetcore/issues/33312 -->
-    <TrimmerRootAssembly Include="Microsoft.Authentication.WebAssembly.Msal" />
   </ItemGroup>
 </Project>

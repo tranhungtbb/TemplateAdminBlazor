@@ -31,8 +31,8 @@ jobs:
         cd src/Admin.Template/Server
         dotnet build --configuration Release --no-restore
 
-        - name: Build .NET project
-        run: dotnet publish -c Release -o root
+    - name: Build .NET project
+      run: dotnet publish -c Release -o root --no-self-contained
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2

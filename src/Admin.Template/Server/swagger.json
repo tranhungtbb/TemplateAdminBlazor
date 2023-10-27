@@ -108,6 +108,24 @@
             "name": "OrderBy",
             "in": "query",
             "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "OrderByDesc",
+            "in": "query",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "ThenBy",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "boolean",
+            "name": "ThenByDesc",
+            "in": "query",
+            "x-nullable": false
           }
         ],
         "responses": {

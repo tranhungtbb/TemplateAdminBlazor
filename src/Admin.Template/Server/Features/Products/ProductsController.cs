@@ -2,9 +2,9 @@
 using Admin.Template.Server.Data;
 using Admin.Template.Server.Data.Entity;
 using Admin.Template.Server.Features.Products.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Admin.Template.Server.Features.Products;
 
@@ -18,6 +18,7 @@ public class ProductsController : ApiControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<PagedResultModel<ProductModel>> List([FromQuery] PagedProductResultRequestModel filter)
     {
         var query = this.Context.Products
@@ -30,10 +31,12 @@ public class ProductsController : ApiControllerBase
             .Filter(filter.Description, x => x.Description.Contains(filter.Description))
             .Filter(filter.Unit, x => x.Unit.Contains(filter.Unit))
             .Filter(filter.Brand, x => x.Brand.Contains(filter.Brand))
-            .Filter(filter.Price, x => x.Price == filter.Price)
-            .OrderBy(filter.OrderBy);
+            .Filter(filter.Price, x => x.Price == filter.Price);
 
-        var result = await this.Map<Product, ProductModel>(query.ToPageList(filter))
+        var result = await this.Map<Product, ProductModel>(
+            query.OrderBy(filter.OrderBy, filter.OrderByDesc)
+            .ThenBy(filter.ThenBy, filter.ThenByDesc)
+            .ToPageList(filter))
             .ToPageResult(await query.CountAsync(), filter);
 
         return result;
@@ -57,13 +60,13 @@ public class ProductsController : ApiControllerBase
         [FromServices] IValidator<CreateProductModel> createProductValidator)
     {
         await createProductValidator.ValidateAndThrowAsync(model);
-        
-        var product = this.Map<CreateProductModel,Product>(model);
+
+        var product = this.Map<CreateProductModel, Product>(model);
 
         await this.Context.Products.AddAsync(product);
         await this.Context.SaveChangesAsync();
 
-        return this.Map<Product,ProductModel>(product);
+        return this.Map<Product, ProductModel>(product);
     }
 
     [HttpPut]
@@ -82,7 +85,7 @@ public class ProductsController : ApiControllerBase
         entity = this.From(entity, model);
         await this.Context.SaveChangesAsync();
 
-        return this.Map<Product,ProductModel>(entity);
+        return this.Map<Product, ProductModel>(entity);
 
     }
 
@@ -99,6 +102,6 @@ public class ProductsController : ApiControllerBase
         this.Context.Products.Remove(entity);
         await this.Context.SaveChangesAsync();
 
-        return this.Map<Product,ProductModel>(entity);
+        return this.Map<Product, ProductModel>(entity);
     }
 }

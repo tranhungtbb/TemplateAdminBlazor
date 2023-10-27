@@ -5,17 +5,6 @@ namespace Admin.Template.Server.Extensions;
 
 public static class DataExtensions
 {
-    public static IQueryable<T> OrderBy<T>(this IQueryable<T> query, string? orderBy)
-    {
-        if (!string.IsNullOrEmpty(orderBy))
-        {
-            query = query.OrderBy(s => s.GetType().GetProperty(orderBy).GetValue(s, null));
-        }
-
-        return query;
-    }
-
-
     public static IQueryable<T> ToPageList<T>(this IQueryable<T> query, PagedResultRequestModel filter)
         where T : EntityBase
     {

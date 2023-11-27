@@ -1,0 +1,76 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+name: 1.1.$(Year:yy)$(DayOfYear)$(Rev:.rr)
+
+trigger:
+- master
+
+resources:
+- repo: self
+  clean: true
+
+variables:
+  buildConfiguration: 'Release'
+  buildPlatform: 'Any CPU'
+  parameters.RestoreBuildProjects: '**/*.csproj'
+
+pool:
+  name: Default
+
+stages:
+- stage: Build
+  jobs:
+  - job: Phase
+    displayName: Phase
+    cancelTimeoutInMinutes: 1
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: '$(Parameters.RestoreBuildProjects)'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        projects: '$(Parameters.RestoreBuildProjects)'
+        arguments: '--configuration $(BuildConfiguration) /p:Version=$(build.buildNumber)'
+
+    # - task: CopyFiles@2
+    #   displayName: 'Copy Scripts'
+    #   inputs:
+    #     SourceFolder: 'release-scripts'
+    #     TargetFolder: '$(build.artifactstagingdirectory)/app'
+    #   enabled: 'true'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish'
+      inputs:
+        command: publish
+        publishWebProjects: False
+        projects: 'src/Admin.Template/Server/Admin.Template.Server.csproj'
+        arguments: '--configuration $(BuildConfiguration) --self-contained --output $(build.artifactstagingdirectory)/app /p:Version=$(build.buildNumber)'
+        zipAfterPublish: True
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish App Artifact'
+      inputs:
+        artifactName: 'App'
+        targetPath: '$(build.artifactstagingdirectory)/app'
+      condition: succeededOrFailed()
+
+- stage: Release_Dev
+  jobs:
+  - job: Phase
+    displayName: Phase
+    cancelTimeoutInMinutes: 1
+    steps:
+      - task: DownloadBuildArtifacts@1
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'App'
+          downloadPath: '$(build.artifactstagingdirectory)/app'
